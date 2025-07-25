@@ -46,3 +46,37 @@ function addTask(event){
     //Limpiar el campo de entrada
     form.toDo.value = "";
 }
+function updateToDoList(){
+    let toDoListElement = document.getElementById("pendientes");
+    toDoListElement.innerHTML = ""; // Limpiar la lista antes de mostrarla
+    
+    toDoList.forEach((task, index) => {
+        let newElement = `
+        <li>
+            <input type="checkbox" id="task-${index}" onchange="checkTask(${index})">
+            <label for="task-${index}">
+                <strong>${task.text}</strong><br>
+                <small style="color: #666;">Agregada: ${task.dateAdded}</small>
+            </label>
+            <button onclick="deleteTask(${index})">Eliminar Tarea</button>
+        </li>`;
+        toDoListElement.innerHTML += newElement;
+    });
+}
+
+function updateCompletedList(){
+    let completedListElement = document.getElementById("completadas");
+    completedListElement.innerHTML = ""; // Limpiar la lista antes de mostrarla
+    
+    completedList.forEach((task, index) => {
+        let newElement = `
+        <li>
+            <span>
+                <strong>${task.text}</strong><br>
+                <small style="color: #666;">Completada desde: ${task.dateAdded}</small>
+            </span>
+            <button onclick="removeCompletedTask(${index})">Eliminar</button>
+        </li>`;
+        completedListElement.innerHTML += newElement;
+    });
+}
