@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <h1>To do List</h1>
+    <form action="#" onsubmit="addTask(event)">
+        <div>
+            <label for="toDo">Nombre de la Tarea: </label>
+            <input type="text" id="toDo" name="toDo" placeholder="Escribe una tarea" required>
+        </div>
+        <div>
+            <button type="submit">Agregar a la Lista</button>
+        </div>
+    </form>
+    <section class="row">
+        <section>
+            <h2>Tareas Pendientes</h2>
+            <ul id="pendientes">
+
+            </ul>
+        </section>
+        <section>
+            <h2>Tareas Completadas</h2>
+            <ul id="completadas">
+
+            </ul>
+        </section>
+    </section>
+</body>
+
+</html>
