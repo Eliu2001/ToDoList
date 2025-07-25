@@ -1,39 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Tareas - Gestiona tus pendientes</title>
+    <meta name="description" content="Aplicación web para gestionar tareas diarias con funcionalidad de agregar, completar y eliminar tareas">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 
 <body>
-    <h1>To do List</h1>
-    <form action="#" onsubmit="addTask(event)">
-        <div>
-            <label for="toDo">Nombre de la Tarea: </label>
-            <input type="text" id="toDo" name="toDo" placeholder="Escribe una tarea" required>
-        </div>
-        <div>
-            <button type="submit">Agregar a la Lista</button>
-        </div>
-    </form>
-    <section class="row">
-        <section>
-            <h2>Tareas Pendientes</h2>
-            <ul id="pendientes">
+    <!-- Skip link para navegación por teclado -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
+    <header>
+        <h1>Lista de Tareas</h1>
+    </header>
 
-            </ul>
-        </section>
-        <section>
-            <h2>Tareas Completadas</h2>
-            <ul id="completadas">
+    <main id="main-content">
+        <form action="#" onsubmit="addTask(event)" aria-labelledby="form-title">
+            <h2 id="form-title" class="visually-hidden">Agregar nueva tarea</h2>
+            <div>
+                <label for="toDo">Nombre de la Tarea: </label>
+                <input 
+                    type="text" 
+                    id="toDo" 
+                    name="toDo" 
+                    placeholder="Escribe una tarea" 
+                    required
+                    aria-describedby="task-help"
+                    aria-invalid="false"
+                >
+                <div id="task-help" class="visually-hidden">
+                    Ingresa el texto de la tarea que deseas agregar a tu lista
+                </div>
+            </div>
+            <div>
+                <button type="submit" aria-describedby="submit-help">
+                    Agregar a la Lista
+                </button>
+                <div id="submit-help" class="visually-hidden">
+                    Presiona Enter o haz clic para agregar la tarea
+                </div>
+            </div>
+        </form>
 
-            </ul>
+        <!-- Región live para anuncios a lectores de pantalla -->
+        <div id="announcements" aria-live="polite" aria-atomic="true" class="visually-hidden"></div>
+
+        <section class="row">
+            <section aria-labelledby="pending-title">
+                <h2 id="pending-title">Tareas Pendientes</h2>
+                <ul id="pendientes" role="list" aria-label="Lista de tareas por completar">
+                    <!-- Las tareas se generarán dinámicamente aquí -->
+                </ul>
+            </section>
+            <section aria-labelledby="completed-title">
+                <h2 id="completed-title">Tareas Completadas</h2>
+                <ul id="completadas" role="list" aria-label="Lista de tareas completadas">
+                    <!-- Las tareas completadas se generarán dinámicamente aquí -->
+                </ul>
+            </section>
         </section>
-    </section>
+    </main>
 </body>
 
 </html>

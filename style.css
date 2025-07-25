@@ -6,6 +6,37 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Clases de accesibilidad */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
 }
 
 h1 {
@@ -66,7 +97,7 @@ li:hover {
 
 li button {
     margin-left: auto;
-    padding: 6px 12px;
+    padding: 8px 16px;
     background-color: #dc3545;
     color: white;
     border: none;
@@ -74,10 +105,35 @@ li button {
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
+    min-height: 44px; /* Tamaño accesible */
+    min-width: 44px;
 }
 
 li button:hover {
     background-color: #c82333;
+}
+
+li button:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+/* Mejorar accesibilidad de checkboxes */
+li input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+li input[type="checkbox"]:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+li label {
+    cursor: pointer;
+    flex-grow: 1;
 }
 form {
     width: 100%;
@@ -112,7 +168,8 @@ form input[type="text"] {
 }
 
 form input[type="text"]:focus {
-    outline: none;
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
     border-color: #2788b4;
 }
 
@@ -125,8 +182,14 @@ form button {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-height: 44px; /* Tamaño mínimo de toque accesible */
 }
 
 form button:hover {
     background-color: #1e6b94;
+}
+
+form button:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
 }

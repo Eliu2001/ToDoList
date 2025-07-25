@@ -6,6 +6,17 @@ function generateUniqueId() {
     return Math.floor(Math.random() * 1000000);
 }
 
+// Función para anunciar cambios a lectores de pantalla
+function announceToScreenReader(message) {
+    const announcements = document.getElementById('announcements');
+    announcements.textContent = message;
+    
+    // Limpiar después de 3 segundos
+    setTimeout(() => {
+        announcements.textContent = '';
+    }, 3000);
+}
+
 // Función para obtener fecha actual usando Date
 function getCurrentDate() {
     const now = new Date();
@@ -43,6 +54,9 @@ function addTask(event){
     //Actualizar la lista de tareas pendientes
     updateToDoList();
     
+    // Anunciar a lectores de pantalla
+    announceToScreenReader(`Tarea "${toDo}" agregada a la lista de pendientes`);
+    
     //Limpiar el campo de entrada
     form.toDo.value = "";
 }
@@ -53,12 +67,23 @@ function updateToDoList(){
     toDoList.forEach((task, index) => {
         let newElement = `
         <li>
-            <input type="checkbox" id="task-${index}" onchange="checkTask(${index})">
-            <label for="task-${index}">
+            <input 
+                type="checkbox" 
+                id="task-${task.id}" 
+                onchange="checkTask(${index})"
+                aria-label="Marcar como completada la tarea: ${task.text}"
+            >
+            <label for="task-${task.id}">
                 <strong>${task.text}</strong><br>
                 <small style="color: #666;">Agregada: ${task.dateAdded}</small>
             </label>
-            <button onclick="deleteTask(${index})">Eliminar Tarea</button>
+            <button 
+                onclick="deleteTask(${index})" 
+                aria-label="Eliminar tarea: ${task.text}"
+                title="Eliminar tarea"
+            >
+                Eliminar
+            </button>
         </li>`;
         toDoListElement.innerHTML += newElement;
     });
@@ -75,7 +100,13 @@ function updateCompletedList(){
                 <strong>${task.text}</strong><br>
                 <small style="color: #666;">Completada desde: ${task.dateAdded}</small>
             </span>
-            <button onclick="removeCompletedTask(${index})">Eliminar</button>
+            <button 
+                onclick="removeCompletedTask(${index})" 
+                aria-label="Eliminar tarea completada: ${task.text}"
+                title="Eliminar de completadas"
+            >
+                Eliminar
+            </button>
         </li>`;
         completedListElement.innerHTML += newElement;
     });
@@ -89,18 +120,33 @@ function checkTask(index){
     // Actualizar ambas listas dinámicamente
     updateToDoList();
     updateCompletedList();
+    
+    // Anunciar a lectores de pantalla
+    announceToScreenReader(`Tarea "${task.text}" marcada como completada`);
 }
 
 function deleteTask(index){
+    // Obtener la tarea antes de eliminarla para el anuncio
+    let task = toDoList[index];
+    
     //Eliminar la tarea de la lista de pendientes
     toDoList.splice(index, 1);
     //Actualizar la lista de tareas pendientes
     updateToDoList();
+    
+    // Anunciar a lectores de pantalla
+    announceToScreenReader(`Tarea "${task.text}" eliminada de pendientes`);
 }
 
 function removeCompletedTask(index){
+    // Obtener la tarea antes de eliminarla para el anuncio
+    let task = completedList[index];
+    
     //Eliminar la tarea de la lista de completadas
     completedList.splice(index, 1);
     //Actualizar la lista de tareas completadas
     updateCompletedList();
+    
+    // Anunciar a lectores de pantalla
+    announceToScreenReader(`Tarea "${task.text}" eliminada de completadas`);
 }
