@@ -80,3 +80,27 @@ function updateCompletedList(){
         completedListElement.innerHTML += newElement;
     });
 }
+function checkTask(index){
+    // Mover la tarea de pendientes a completadas usando manipulación de arreglos
+    let task = toDoList[index];
+    completedList.push(task);
+    toDoList.splice(index, 1); // Usar splice() para eliminar del arreglo original
+    
+    // Actualizar ambas listas dinámicamente
+    updateToDoList();
+    updateCompletedList();
+}
+
+function deleteTask(index){
+    //Eliminar la tarea de la lista de pendientes
+    toDoList.splice(index, 1);
+    //Actualizar la lista de tareas pendientes
+    updateToDoList();
+}
+
+function removeCompletedTask(index){
+    //Eliminar la tarea de la lista de completadas
+    completedList.splice(index, 1);
+    //Actualizar la lista de tareas completadas
+    updateCompletedList();
+}
